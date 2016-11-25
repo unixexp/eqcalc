@@ -1,0 +1,27 @@
+div[id*=Settings_title_] {
+	margin-top: 10px;
+}
+
+table[id*="Settings_"] {
+	margin-top: 5px;
+	width: 40%;
+}
+
+td[id*="Settings_primeprice_td_title_"] {
+	width: 100%;
+}
+
+table[class="settings_ui"], tr[class="settings_ui"], td[class="settings_ui"] {
+        border-collapse: collapse;
+        border: 1px double #7092be;
+	padding: 4px;
+	font-size: 14px;
+}
+
+input[type=text] {
+	width: 100px;
+}
+
+input[id*=_Settings_save] {
+	margin-top: 7px;
+}

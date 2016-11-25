@@ -1,0 +1,59 @@
+div[class*="_sdescr_div"], div[class*="_fdescr_div"] {
+	padding-left: 15px;
+}
+
+div[class*="_sdescr_h"], div[class*="_fdescr_h"], div[class*="_R-title"] {
+}
+
+div[class*="_R-title"] {
+	padding-top: 20px;
+}
+
+table[id*="calculator_container_main_"] {
+	border: 0;
+	width: 70%;
+}
+
+table[class="calculator_ui"] {
+	width: 450px;
+}
+
+td[id*="calculator_subcontainer_right_p1_"], td[id*="calculator_subcontainer_right_p2_"] {
+	padding-left: 15px;
+}
+
+table[class="calculator_ui"], tr[class="calculator_ui"], td[class="calculator_ui"] {
+	border-collapse: collapse;
+	border: 1px double #7092be;
+	padding: 3px;
+	font-size: 14px;
+}
+
+table[class="report_ui"], tr[class="report_ui"], td[class="report_ui"] {
+        border-collapse: collapse;
+        border: 1px double #7092be;
+	padding: 4px;
+	font-size: 14px;
+}
+
+td[id*="calculator_subcontainer_left_"], td[id*="calculator_subcontainer_right_p1_"] {
+	text-align: left;
+	vertical-align: top;
+}
+
+td[id*="calculator_subcontainer_right_p2_"] {
+	text-align: left;
+	vertical-align: bottom;
+}
+
+input[type=button] {
+	width: 100px;
+	height: 35px;
+	background-color: #7092be;
+	color: white;
+	border:1px solid black;
+}
+
+img[id*=Report_delete_img_] {
+	cursor: pointer;
+}

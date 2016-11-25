@@ -1,0 +1,145 @@
+DROP DATABASE IF EXISTS `eqcalc_db`;
+CREATE DATABASE `eqcalc_db`;
+
+USE `eqcalc_db`;
+
+DROP TABLE IF EXISTS `object_chassis`;
+DROP TABLE IF EXISTS `object_cpu`;
+DROP TABLE IF EXISTS `object_ram`;
+DROP TABLE IF EXISTS `object_hdd`;
+DROP TABLE IF EXISTS `object_ssd`;
+DROP TABLE IF EXISTS `object_raid`;
+DROP TABLE IF EXISTS `object_price`;
+DROP TABLE IF EXISTS `primeprice`;
+DROP TABLE IF EXISTS `payback`;
+DROP TABLE IF EXISTS `configuration_storage`;
+
+/* TABLES FOR object DATA */
+
+CREATE TABLE `object_chassis` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `units_count` ENUM('1U', '2U', '4U') NOT NULL DEFAULT '1U',
+  `socket` ENUM('Socket 1150','Socket 1151','Socket 2011') COLLATE utf8_bin NOT NULL DEFAULT 'Socket 1150',
+  `cpu_count` ENUM('1','2') NOT NULL DEFAULT '1',
+  `ram_type` ENUM('DDR2','DDR3','DDR4') NOT NULL DEFAULT 'DDR2',
+  `ram_q` ENUM('4','8','16') NOT NULL DEFAULT '4',
+  `hdd_qty` ENUM('2','4','8') NOT NULL DEFAULT '2',
+  `ssd_qty` ENUM('2','4','8') NOT NULL DEFAULT '2',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_chassis` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_chassis` ADD INDEX (id,code);
+
+/*-----------------------------------------------------------------------------------------*/
+
+CREATE TABLE `object_cpu` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `socket` ENUM('Socket 1150','Socket 1151','Socket 2011') COLLATE utf8_bin NOT NULL DEFAULT 'Socket 1150',
+  `core_count` ENUM('1','2','4','8') NOT NULL DEFAULT '1',
+  `frequency` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_cpu` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_cpu` ADD INDEX (id,code);
+
+CREATE TABLE `object_ram` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `ram_type` ENUM('DDR2','DDR3','DDR4') NOT NULL DEFAULT 'DDR2',
+  `capacity` ENUM('1GB', '2GB', '4GB', '8GB', '16GB') NOT NULL DEFAULT '1GB',
+  `frequency` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_ram` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_ram` ADD INDEX (id,code);
+
+CREATE TABLE `object_hdd` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `capacity` ENUM('250GB', '500GB', '1TB', '2TB', '4TB') NOT NULL DEFAULT '1TB',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_hdd` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_hdd` ADD INDEX (id,code);
+
+CREATE TABLE `object_ssd` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `capacity` ENUM('250GB', '500GB', '1TB', '2TB', '4TB') NOT NULL DEFAULT '1TB',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_ssd` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_ssd` ADD INDEX (id,code);
+
+CREATE TABLE `object_raid` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_raid` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_raid` ADD INDEX (id,code);
+
+CREATE TABLE `object_price` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `price` FLOAT NOT NULL DEFAULT 0.0,
+  `country_code` ENUM('UA', 'NL') NOT NULL DEFAULT 'UA',
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `object_price` ADD code BIGINT UNSIGNED NOT NULL FIRST;
+ALTER TABLE `object_price` ADD INDEX (id,code);
+
+CREATE TABLE `primeprice` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `price` FLOAT NOT NULL DEFAULT 0.0,
+  `country_code` ENUM('UA', 'NL') NOT NULL DEFAULT 'UA',
+  PRIMARY KEY (`id`, `country_code`, `price`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `payback` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `months` INT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`, `months`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `saved_reports` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `UA_price1` FLOAT NOT NULL DEFAULT 0.0,
+  `UA_price2` FLOAT NOT NULL DEFAULT 0.0,
+  `UA_price3` FLOAT NOT NULL DEFAULT 0.0,
+  `UA_hwprice` FLOAT NOT NULL DEFAULT 0.0,
+  `NL_price1` FLOAT NOT NULL DEFAULT 0.0,
+  `NL_price2` FLOAT NOT NULL DEFAULT 0.0,
+  `NL_price3` FLOAT NOT NULL DEFAULT 0.0,
+  `NL_hwprice` FLOAT NOT NULL DEFAULT 0.0,
+  PRIMARY KEY(`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `primeprice` (price, country_code) VALUES (20, 'UA');
+INSERT INTO `primeprice` (price, country_code) VALUES (25, 'NL');
+
+INSERT INTO `payback` (months) VALUES (20);
+INSERT INTO `payback` (months) VALUES (25);
+INSERT INTO `payback` (months) VALUES (30);
+
+DROP USER 'eqcalc'@'localhost';
+CREATE USER 'eqcalc'@'localhost' IDENTIFIED BY 'eqcalc';
+GRANT ALL PRIVILEGES ON eqcalc_db.* to 'eqcalc'@'localhost';
+
+

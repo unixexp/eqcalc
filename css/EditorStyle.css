@@ -1,0 +1,57 @@
+div[id*=Editor_title_] {
+	margin-top: 10px;
+	color: darkred;
+}
+
+table[id*="Editor_"] {
+	margin-top: 5px;
+	width: 50%;
+}
+
+td[id*="Editor_description_td_"] {
+	width: 100%;
+}
+
+td[id*="Editor_description_td_add_"] {
+        width: 100px;
+}
+
+td[id*="Editor_field_td_add_"] {
+        width: 100%;
+}
+
+td[id*="Editor_add_td_"] {
+	text-align: right;
+}
+
+table[class="editor_ui"], tr[class="editor_ui"], td[class="editor_ui"] {
+        border-collapse: collapse;
+        border: 1px double #7092be;
+	padding: 4px;
+	font-size: 14px;
+}
+
+input[id*=_Editor_save] {
+	margin-top: 7px;
+}
+
+input[id*=_Editor_cancel_add] {
+        margin-top: 7px;
+        margin-left: 7px;
+}
+
+input[id*=Editor_add_] {
+	height: 20px;
+}
+
+input[id*=Editor_field_input_] {
+	width: 100%;
+}
+
+input[id*=Editor_field_input_price_] {
+        width: 100px;
+}
+
+img[id*=Editor_edit_img_], img[id*=Editor_delete_img_] {
+	cursor: pointer;
+}

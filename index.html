@@ -1,0 +1,82 @@
+<html>
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<title>Главное окно</title>
+	<link rel="stylesheet" href="css/TABStyle.css" type="text/css">
+	<link rel="stylesheet" href="css/CalculatorStyle.css" type="text/css">
+	<link rel="stylesheet" href="css/SettingsStyle.css" type="text/css">
+	<link rel="stylesheet" href="css/EditorStyle.css" type="text/css">
+</head>
+
+<body id="main_body">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/InitClass.js"></script>
+<script type="text/javascript" src="js/ReportClass.js"></script>
+<script type="text/javascript" src="js/CalculatorClass.js"></script>
+<script type="text/javascript" src="js/MainContainerClass.js"></script>
+<script type="text/javascript" src="js/SettingsClass.js"></script>
+<script type="text/javascript" src="js/EditorClass.js"></script>
+
+<script language="javascript">
+	var tab_container = new MainContainerClass('#main_body');
+	tab_container.addTab('tab_calculator', 'Калькулятор', true, false);
+	tab_container.addTab('tab_settings', 'Настройки', false, false);
+	tab_container.addTab('tab_editor', 'Редактор', false, false);
+
+	var calc = new CalculatorClass(tab_container.getTab('tab_calculator'));
+	calc.createObject ('chassis', 'Шасси', '', 'SELECTOR', '', '', true, 'static', '!name|units_count','');
+	calc.createObject ('cpu', 'CPU', 'chassis', 'SELECTOR', '', 'socket', false, 'static', '!name|socket|core_count|frequency','');
+	calc.createObject ('ram', 'RAM', 'chassis', 'SELECTOR_Q', '', 'ram_type', false, 'static', '!name|ram_type|capacity|frequency','capacity');
+	calc.createObject ('raid', 'RAID', 'chassis', 'SELECTOR', '', '', false, 'static', '!name','');
+	calc.createObject ('hdd', 'HDD', 'chassis', 'SELECTOR', '', '', false, 'dynamic', '!name|capacity','');
+	calc.createObject ('ssd', 'SSD', 'chassis', 'SELECTOR', '', '', false, 'dynamic', '!name|capacity','');
+	calc.showObjects('ALL');
+	calc.setReportShortDescription("*cpu.name|/|*ram.capacity| RAM|/|raid.name|/|^%hdd.capacity| |^%ssd.capacity");
+
+	var settings = new SettingsClass(tab_container.getTab('tab_settings'));
+
+	var hardware_set = { 
+			"chassis":{
+				"Наименование":"name",
+			   	"Размер":"units_count",
+			   	"CPU socket":"socket",
+			  	 "Кол-во CPU":"cpu_count",
+			   	"Тип RAM":"ram_type",
+			   	"Кол-во RAM":"ram_q",
+			   	"Кол-во HDD":"hdd_qty",
+		           	"Кол-во SSD":"ssd_qty"
+			},
+			"cpu":{
+				"Наименование":"name",
+			   	"CPU socket":"socket",
+			  	"Кол-во ядер":"core_count",
+			   	"Частота":"frequency"
+			},
+			"ram":{
+				"Наименование":"name",
+			   	"Тип памяти":"ram_type",
+			   	"Объем":"capacity",
+			  	"Частота":"frequency"
+			},
+			"hdd":{
+				"Наименование":"name",
+			   	"Объем":"capacity"
+			},
+			"ssd":{
+				"Наименование":"name",
+			   	"Объем":"capacity"
+			},
+			"raid":{
+				"Наименование":"name"
+			}
+	}
+
+	var editor = new EditorClass(tab_container.getTab('tab_editor'), calc, 'chassis|cpu|ram|raid|hdd|ssd');
+	editor.setHardwareSet(hardware_set);
+
+</script>
+
+</body>
+</html>
